@@ -19,6 +19,7 @@ from itertools import product
 import ntpath
 import argparse
 import time
+from tqdm import tqdm
 
 from ggl_score import *
 
@@ -73,7 +74,7 @@ class GeometricGraphLearningFeatures:
         else:
         	raise ValueError("Unidentified method specified, only accepted methods are 'SYBYL' and 'ECIF'.")
 
-        for index, _pdbid in enumerate(pdbids):
+        for index, _pdbid in enumerate(tqdm(pdbids, total=len(pdbids), desc='Computing GGL features')):
             if self.method == 'SYBYL':
                 lig_file = f'{self.data_folder}/{_pdbid}/{_pdbid}_ligand.mol2'
             elif self.method == 'ECIF':
