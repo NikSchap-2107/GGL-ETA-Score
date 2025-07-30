@@ -134,7 +134,7 @@ def get_args(args):
     					help='path to data folder directory')
     parser.add_argument('-fd', '--feature_folder', type=str,
     					help='path to the directory where features will be saved')
-    parser.add_argument('--src', type=str, required=True, helo="Path to repo src directory")
+    parser.add_argument('--src', type=str, required=True, help="Path to repo src directory")
 
     args = parser.parse_args()
 
