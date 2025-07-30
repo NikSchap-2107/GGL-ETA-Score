@@ -25,8 +25,6 @@ from ggl_score import *
 
 class GeometricGraphLearningFeatures:
 
-    df_kernels = pd.read_csv('../utils/kernels.csv')
-
     def __init__(self, args):
         """
         Parameters
@@ -45,6 +43,8 @@ class GeometricGraphLearningFeatures:
         feature csv file
 
         """
+        self.df_kernels = pd.read_csv(f"{args.src}/utils/kernels.csv")
+
         self.kernel_index = args.kernel_index
         self.cutoff = args.cutoff
         self.path_to_csv = args.path_to_csv
@@ -53,6 +53,8 @@ class GeometricGraphLearningFeatures:
 
         self.data_folder = args.data_folder
         self.feature_folder = args.feature_folder
+
+        self.src = args.src
 
 
     def get_ggl_features(self, parameters):
@@ -65,7 +67,7 @@ class GeometricGraphLearningFeatures:
                                 kappa=parameters['power'], tau=parameters['tau'])
 
         if self.method == 'SYBYL':
-            GGL = SYBYL_GGL(Kernel=Kernel, cutoff=parameters['cutoff'])
+            GGL = SYBYL_GGL(Kernel=Kernel, cutoff=parameters['cutoff'], src=self.src)
         elif self.method == 'ECIF':
             GGL = ECIF_GGL(Kernel=Kernel, cutoff=parameters['cutoff'])
         else:
@@ -132,6 +134,7 @@ def get_args(args):
     					help='path to data folder directory')
     parser.add_argument('-fd', '--feature_folder', type=str,
     					help='path to the directory where features will be saved')
+    parser.add_argument('--src', type=str, required=True, helo="Path to repo src directory")
 
     args = parser.parse_args()
 

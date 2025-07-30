@@ -53,22 +53,22 @@ class KernelFunction:
 
 class SYBYL_GGL:
 
-    protein_atom_types_df = pd.read_csv(
-        '../utils/protein_atom_types.csv')
+    def __init__(self, Kernel, cutoff, src):
 
-    ligand_atom_types_df = pd.read_csv(
-        '../utils/ligand_SYBYL_atom_types.csv')
+        protein_atom_types_df = pd.read_csv(
+            f"{src}/utils/protein_atom_types.csv")
 
-    protein_atom_types = protein_atom_types_df['AtomType'].tolist()
-    protein_atom_radii = protein_atom_types_df['Radius'].tolist()
+        ligand_atom_types_df = pd.read_csv(
+            f"{src}/utils/ligand_SYBYL_atom_types.csv")
 
-    ligand_atom_types = ligand_atom_types_df['AtomType'].tolist()
-    ligand_atom_radii = ligand_atom_types_df['Radius'].tolist()
+        self.protein_atom_types = protein_atom_types_df['AtomType'].tolist()
+        self.protein_atom_radii = protein_atom_types_df['Radius'].tolist()
 
-    protein_ligand_atom_types = [
-        i[0]+"-"+i[1] for i in product(protein_atom_types, ligand_atom_types)]
+        self.ligand_atom_types = ligand_atom_types_df['AtomType'].tolist()
+        self.ligand_atom_radii = ligand_atom_types_df['Radius'].tolist()
 
-    def __init__(self, Kernel, cutoff):
+        self.protein_ligand_atom_types = [
+            i[0]+"-"+i[1] for i in product(self.protein_atom_types, self.ligand_atom_types)]
 
         self.Kernel = Kernel
         self.cutoff = cutoff
