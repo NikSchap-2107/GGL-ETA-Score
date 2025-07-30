@@ -69,7 +69,7 @@ class GeometricGraphLearningFeatures:
         if self.method == 'SYBYL':
             GGL = SYBYL_GGL(Kernel=Kernel, cutoff=parameters['cutoff'], src=self.src)
         elif self.method == 'ECIF':
-            GGL = ECIF_GGL(Kernel=Kernel, cutoff=parameters['cutoff'])
+            GGL = ECIF_GGL(Kernel=Kernel, cutoff=parameters['cutoff'], src=self.src)
         else:
         	raise ValueError("Unidentified method specified, only accepted methods are 'SYBYL' and 'ECIF'.")
 

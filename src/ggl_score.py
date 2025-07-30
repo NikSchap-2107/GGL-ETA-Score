@@ -257,10 +257,10 @@ class ECIF_GGL:
         'V': 1.34
     }
 
-    Atom_Keys = pd.read_csv(
-        "../utils//PDB_Atom_Keys.csv", sep=",")
-
-    def __init__(self, Kernel, cutoff):
+    def __init__(self, Kernel, cutoff, src):
+        self.Atom_Keys = pd.read_csv(
+            f"{src}/utils//PDB_Atom_Keys.csv", sep=",")
+        
         self.Kernel = Kernel
         self.cutoff = cutoff
 
